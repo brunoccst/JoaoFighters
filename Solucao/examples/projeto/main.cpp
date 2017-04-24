@@ -11,7 +11,7 @@
 #include <cmath>
 
 #include "Game.h"
-#include "MenuState.h"
+#include "PlayState.h"
 
 int main(int argc, char **argv)
 {
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 
 	game.init("Framework com estados, sprites e tiling",800,600,false);
 
-    game.changeState(MenuState::instance());
+    game.changeState(PlayState::instance());
 
 	while(game.isRunning())
 	{

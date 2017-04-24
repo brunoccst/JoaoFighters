@@ -19,17 +19,11 @@ using namespace std;
 
 void PlayState::init()
 {
-    player.load("data/img/Char14.png");
-	player.setPosition(10,100);
+    playSprite1.load("data/img/Char14.png");
+    playSprite1.setPosition(10,100);
 
-    playSprite2.load("data/img/Char01.png");
-	playSprite2.setPosition(10,300);
-
-    playSprite3.load("data/img/Char01.png");
-	playSprite3.setPosition(50,300);
-
-    dirx = 0; // sprite direction: right (1), left (-1)
-    diry = 0; // down (1), up (-1)
+    dirx = 0; // direção do sprite: para a direita (1), esquerda (-1)
+    diry = 0; // baixo (1), cima (-1)
 
     im = cgf::InputManager::instance();
 
@@ -41,26 +35,27 @@ void PlayState::init()
     im->addKeyInput("stats", sf::Keyboard::S);
     im->addMouseInput("rightclick", sf::Mouse::Right);
 
-	cout << "PlayState: Init" << endl;
+    cout << "PlayState: Init" << endl;
 }
 
 void PlayState::cleanup()
 {
-	cout << "PlayState: Clean" << endl;
+    cout << "PlayState: Clean" << endl;
 }
 
 void PlayState::pause()
 {
-	cout << "PlayState: Paused" << endl;
+    cout << "PlayState: Paused" << endl;
 }
 
 void PlayState::resume()
 {
-	cout << "PlayState: Resumed" << endl;
+    cout << "PlayState: Resumed" << endl;
 }
 
 void PlayState::handleEvents(cgf::Game* game)
 {
+    screen = game->getScreen();
     sf::Event event;
 
     while (screen->pollEvent(event))
@@ -88,22 +83,18 @@ void PlayState::handleEvents(cgf::Game* game)
 
     if(im->testEvent("stats"))
         game->toggleStats();
+
+    playSprite1.setXspeed(50*dirx);
+    playSprite1.setYspeed(50*diry);
 }
 
 void PlayState::update(cgf::Game* game)
 {
-    float x = player.getPosition().x;
-    float y = player.getPosition().y;
-    x += dirx*5;
-    y += diry*5;
-    player.setPosition(x,y);
-    player.update(game->getUpdateInterval());
+    playSprite1.update(game->getUpdateInterval());
 }
 
 void PlayState::draw(cgf::Game* game)
 {
     screen = game->getScreen();
-    screen->draw(player);
-    screen->draw(playSprite2);
-    screen->draw(playSprite3);
+    screen->draw(playSprite1);
 }
