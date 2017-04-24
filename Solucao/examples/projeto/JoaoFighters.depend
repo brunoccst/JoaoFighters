@@ -2459,13 +2459,13 @@
 	"PlayState.h"
 	"InputManager.h"
 
-1490641306 source:/home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/main.cpp
+1493070663 source:/home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/main.cpp
 	<iostream>
 	<cstdlib>
 	<string>
 	<cmath>
 	"Game.h"
-	"PlayState.h"
+	"States/MenuState.h"
 
 1490641306 /home/14104872/Desktop/JoaoFighters/Solucao/lib/CGF/include/Game.h
 	<SFML/Audio.hpp>
@@ -3028,5 +3028,41 @@
 	<cmath>
 	"Game.h"
 	"PlayState.h"
+	"InputManager.h"
+
+1493069962 source:/home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/Estados/EstadoCombate.cpp
+	<iostream>
+	<cmath>
+	"Game.h"
+	"EstadoCombate.h"
+	"InputManager.h"
+
+1493069916 /home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/Estados/EstadoCombate.h
+	"GameState.h"
+	"Sprite.h"
+	"InputManager.h"
+
+1493070645 /home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/States/MenuState.h
+	"GameState.h"
+	"Sprite.h"
+	"InputManager.h"
+
+1493070760 source:/home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/States/CombatState.cpp
+	<iostream>
+	<cmath>
+	"Game.h"
+	"CombatState.h"
+	"InputManager.h"
+
+1493070814 /home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/States/CombatState.h
+	"GameState.h"
+	"Sprite.h"
+	"InputManager.h"
+
+1493070583 source:/home/14104872/Desktop/JoaoFighters/Solucao/examples/projeto/States/MenuState.cpp
+	<iostream>
+	<cmath>
+	"Game.h"
+	"MenuState.h"
 	"InputManager.h"
 

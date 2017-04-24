@@ -1,26 +1,23 @@
 /*
- *  PlayState.cpp
- *  Normal "play" state
- *
- *  Created by Marcelo Cohen on 08/13.
- *  Copyright 2013 PUCRS. All rights reserved.
+ *  CombatState.cpp
+ *  Estado de combate (jogador contra jogador);
  *
  */
 
 #include <iostream>
 #include <cmath>
 #include "Game.h"
-#include "PlayState.h"
+#include "CombatState.h"
 #include "InputManager.h"
 
-PlayState PlayState::m_PlayState;
+CombatState CombatState::m_CombatState;
 
 using namespace std;
 
-void PlayState::init()
+void CombatState::init()
 {
-    playSprite1.load("data/img/Char14.png");
-    playSprite1.setPosition(10,100);
+    player1.load("data/img/Char14.png");
+    player1.setPosition(10,100);
 
     dirx = 0; // direção do sprite: para a direita (1), esquerda (-1)
     diry = 0; // baixo (1), cima (-1)
@@ -35,25 +32,25 @@ void PlayState::init()
     im->addKeyInput("stats", sf::Keyboard::S);
     im->addMouseInput("rightclick", sf::Mouse::Right);
 
-    cout << "PlayState: Init" << endl;
+    cout << "EstadoCombate: Init" << endl;
 }
 
-void PlayState::cleanup()
+void CombatState::cleanup()
 {
-    cout << "PlayState: Clean" << endl;
+    cout << "EstadoCombate: Clean" << endl;
 }
 
-void PlayState::pause()
+void CombatState::pause()
 {
-    cout << "PlayState: Paused" << endl;
+    cout << "EstadoCombate: Paused" << endl;
 }
 
-void PlayState::resume()
+void CombatState::resume()
 {
-    cout << "PlayState: Resumed" << endl;
+    cout << "EstadoCombate: Resumed" << endl;
 }
 
-void PlayState::handleEvents(cgf::Game* game)
+void CombatState::handleEvents(cgf::Game* game)
 {
     screen = game->getScreen();
     sf::Event event;
@@ -84,17 +81,17 @@ void PlayState::handleEvents(cgf::Game* game)
     if(im->testEvent("stats"))
         game->toggleStats();
 
-    playSprite1.setXspeed(50*dirx);
-    playSprite1.setYspeed(50*diry);
+    player1.setXspeed(50*dirx);
+    player1.setYspeed(50*diry);
 }
 
-void PlayState::update(cgf::Game* game)
+void CombatState::update(cgf::Game* game)
 {
-    playSprite1.update(game->getUpdateInterval());
+    player1.update(game->getUpdateInterval());
 }
 
-void PlayState::draw(cgf::Game* game)
+void CombatState::draw(cgf::Game* game)
 {
     screen = game->getScreen();
-    screen->draw(playSprite1);
+    screen->draw(player1);
 }

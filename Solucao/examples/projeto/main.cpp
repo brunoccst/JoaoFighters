@@ -11,15 +11,15 @@
 #include <cmath>
 
 #include "Game.h"
-#include "PlayState.h"
+#include "States/MenuState.h"
 
 int main(int argc, char **argv)
 {
     cgf::Game game(5,30);
 
-	game.init("Framework com estados, sprites e tiling",800,600,false);
+	game.init("JoaoFighter",800,600,false);
 
-    game.changeState(PlayState::instance());
+    game.changeState(MenuState::instance());
 
 	while(game.isRunning())
 	{
