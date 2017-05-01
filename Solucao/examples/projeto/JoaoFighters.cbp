@@ -119,8 +119,14 @@
 		<Linker>
 			<Add directory="../../lib" />
 		</Linker>
-		<Unit filename="PlayState.cpp" />
-		<Unit filename="PlayState.h" />
+		<Unit filename="JoaoFighters.depend" />
+		<Unit filename="JoaoFighters.layout" />
+		<Unit filename="JoaoFighters.pro" />
+		<Unit filename="JoaoFighters.user" />
+		<Unit filename="States/CombatState.cpp" />
+		<Unit filename="States/CombatState.h" />
+		<Unit filename="States/MenuState.cpp" />
+		<Unit filename="States/MenuState.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

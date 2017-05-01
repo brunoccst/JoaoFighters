@@ -43,6 +43,11 @@ class MenuState : public cgf::GameState
 
         sf::RenderWindow* screen;
         cgf::InputManager* im;
+        cgf::Sprite backgroundSprite;
+        cgf::Sprite btn1Sprite;
+
+        sf::Font font;
+        sf::Text text;
 };
 
 #endif // MENUSTATE_H
