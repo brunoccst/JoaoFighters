@@ -1168,14 +1168,14 @@
 	"InputManager.h"
 	"../Constants.h"
 
-1494279590 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.h
+1494280566 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
 
 1494278717 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\constants.h
 
-1494279681 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.cpp
+1494280678 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"

@@ -20,7 +20,20 @@ const char* SpiderMan = "Sprites/Spidey1.png";
 
 void RunState::init()
 {
-    backgroundSprite.load("BackGroundImages/CityClean3.png");
+    // Carrega background
+    char* backgroundImage = "BackGroundImages/CityClean3.png";
+
+    backgroundSprite1.load(backgroundImage);
+    backgroundSprite1.setScale(0.8, 0.50);
+
+    backgroundSprite2.load(backgroundImage);
+    backgroundSprite2.setScale(0.8, 0.50);
+
+    backgroundX = 0.0;
+    backgroundXSize = backgroundSprite1.getSize().x - 300;
+    updateBackgroundImage();
+
+    // Carrega player
     player.load(SpiderMan);
     player.setPosition(10,500);
 
@@ -117,11 +130,21 @@ void RunState::updateScoreLabel() {
     scoreLabel.setString(convert.str());
 }
 
+void RunState::updateBackgroundImage(){
+    backgroundSprite1.setPosition(backgroundX, 0);
+    backgroundSprite2.setPosition(backgroundX + backgroundXSize, 0);
+    backgroundX -= 0.1;
+    if (0 - backgroundX >=  backgroundXSize)
+    {
+        backgroundX = 0;
+    }
+}
+
 void RunState::draw(cgf::Game* game)
 {
     screen = game->getScreen();
-    backgroundSprite.setPosition(0,0);
-    backgroundSprite.setScale(0.8, 0.50);
+    backgroundSprite1.setPosition(0,0);
+
 
     score += 1;
     if (score % 10 == 0) {
@@ -129,8 +152,10 @@ void RunState::draw(cgf::Game* game)
     }
 
     updateScoreLabel();
+    updateBackgroundImage();
     player.setScale(1.5, 1.5);
-    screen->draw(backgroundSprite);
+    screen->draw(backgroundSprite1);
+    screen->draw(backgroundSprite2);
     screen->draw(player);
     screen->draw(scoreLabel);
 }
