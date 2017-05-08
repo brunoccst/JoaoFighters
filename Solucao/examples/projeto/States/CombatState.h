@@ -46,6 +46,7 @@ class CombatState : public cgf::GameState
         cgf::Sprite player2;
 
         sf::RenderWindow* screen;
+        cgf::Sprite backgroundSprite;
         cgf::InputManager* im;
 };
 

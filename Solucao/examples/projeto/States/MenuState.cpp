@@ -8,6 +8,7 @@
 #include <cmath>
 #include "Game.h"
 #include "MenuState.h"
+#include "CombatState.h"
 #include "InputManager.h"
 
 MenuState MenuState::m_MenuState;
@@ -30,6 +31,12 @@ void MenuState::init()
     text.setCharacterSize(32); // in pixels
     text.setFillColor(sf::Color::Red);
     text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    text2.setFont(font);
+    text2.setString(L"Press Space to Play");
+    text2.setCharacterSize(32); // in pixels
+    text2.setFillColor(sf::Color::Red);
+    text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
 void MenuState::cleanup()
@@ -66,6 +73,8 @@ void MenuState::handleEvents(cgf::Game* game)
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::Escape)
                 game->quit();
+            else if(event.key.code == sf::Keyboard::Space)
+                game->changeState(CombatState::instance());
             break;
 
         default:
@@ -85,6 +94,8 @@ void MenuState::draw(cgf::Game* game)
     backgroundSprite.setPosition(0,0);
     backgroundSprite.setScale(0.75, 0.64);
     text.setPosition(400, 200);
+    text2.setPosition(360, 350);
     screen->draw(backgroundSprite);
     screen->draw(text);
+    screen->draw(text2);
 }

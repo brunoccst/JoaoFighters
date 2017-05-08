@@ -520,7 +520,7 @@
 	<SFML/System/Time.hpp>
 	<SFML/System/Clock.hpp>
 
-1493680593 c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\menustate.h
+1494212030 c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\menustate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -563,22 +563,23 @@
 	<map>
 	<SFML/Graphics.hpp>
 
-1493657315 source:c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\combatstate.cpp
+1494222331 source:c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\combatstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
 	"CombatState.h"
 	"InputManager.h"
 
-1493657315 c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\combatstate.h
+1494215023 c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\combatstate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
 
-1493679924 source:c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\menustate.cpp
+1494219690 source:c:\users\joaof\desktop\joaofighters\solucao\examples\projeto\states\menustate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
 	"MenuState.h"
+	"CombatState.h"
 	"InputManager.h"
 

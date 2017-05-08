@@ -48,6 +48,7 @@ class MenuState : public cgf::GameState
 
         sf::Font font;
         sf::Text text;
+        sf::Text text2;
 };
 
 #endif // MENUSTATE_H
