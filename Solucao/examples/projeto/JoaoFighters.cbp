@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="JoaoFighters" />
+		<Option title="RunSpidey" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -119,12 +119,13 @@
 		<Linker>
 			<Add directory="../../lib" />
 		</Linker>
+		<Unit filename="Constants.h" />
 		<Unit filename="JoaoFighters.depend" />
 		<Unit filename="JoaoFighters.layout" />
 		<Unit filename="JoaoFighters.pro" />
 		<Unit filename="JoaoFighters.user" />
-		<Unit filename="States/CombatState.cpp" />
 		<Unit filename="States/CombatState.h" />
+		<Unit filename="States/GameState.cpp" />
 		<Unit filename="States/MenuState.cpp" />
 		<Unit filename="States/MenuState.h" />
 		<Unit filename="main.cpp" />

@@ -47,8 +47,8 @@ class MenuState : public cgf::GameState
         cgf::Sprite btn1Sprite;
 
         sf::Font font;
-        sf::Text text;
-        sf::Text text2;
+        sf::Text titleLabel;
+        sf::Text startGameLabel;
 };
 
 #endif // MENUSTATE_H

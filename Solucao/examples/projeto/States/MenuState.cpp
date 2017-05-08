@@ -8,10 +8,17 @@
 #include <cmath>
 #include "Game.h"
 #include "MenuState.h"
-#include "CombatState.h"
+#include "RunState.h"
 #include "InputManager.h"
+#include "../Constants.h"
 
 MenuState MenuState::m_MenuState;
+
+// General constants
+const char* StartGameText = "Press Space to Play";
+
+// Sprites path
+const char* BackgroundImage = "BackGroundImages/CityNight2.png";
 
 using namespace std;
 
@@ -19,24 +26,24 @@ void MenuState::init()
 {
     //Loading background image
     im = cgf::InputManager::instance();
-    backgroundSprite.load("BackGroundImages/CityNight2.png");
+    backgroundSprite.load(BackgroundImage);
 
     //Loading fonts and texts
     if (!font.loadFromFile("data/fonts/arial.ttf")) {
         cout << "Cannot load arial.ttf font!" << endl;
         exit(1);
     }
-    text.setFont(font);
-    text.setString(L"John Runners");
-    text.setCharacterSize(32); // in pixels
-    text.setFillColor(sf::Color::Red);
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    titleLabel.setFont(font);
+    titleLabel.setString(GameTitle);
+    titleLabel.setCharacterSize(32); // in pixels
+    titleLabel.setFillColor(sf::Color::Red);
+    titleLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
-    text2.setFont(font);
-    text2.setString(L"Press Space to Play");
-    text2.setCharacterSize(32); // in pixels
-    text2.setFillColor(sf::Color::Red);
-    text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    startGameLabel.setFont(font);
+    startGameLabel.setString(StartGameText);
+    startGameLabel.setCharacterSize(32); // in pixels
+    startGameLabel.setFillColor(sf::Color::Red);
+    startGameLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
 void MenuState::cleanup()
@@ -74,7 +81,7 @@ void MenuState::handleEvents(cgf::Game* game)
             if(event.key.code == sf::Keyboard::Escape)
                 game->quit();
             else if(event.key.code == sf::Keyboard::Space)
-                game->changeState(CombatState::instance());
+                game->changeState(RunState::instance());
             break;
 
         default:
@@ -93,9 +100,9 @@ void MenuState::draw(cgf::Game* game)
     screen = game->getScreen();
     backgroundSprite.setPosition(0,0);
     backgroundSprite.setScale(0.75, 0.64);
-    text.setPosition(400, 200);
-    text2.setPosition(360, 350);
+    titleLabel.setPosition(400, 200);
+    startGameLabel.setPosition(360, 350);
     screen->draw(backgroundSprite);
-    screen->draw(text);
-    screen->draw(text2);
+    screen->draw(titleLabel);
+    screen->draw(startGameLabel);
 }

@@ -1,17 +1,17 @@
 /*
- *  CombatState.cpp
+ *  RunState.cpp
  *  Estado de combate (jogador contra jogador);
  *
  */
 
-#ifndef COMBATSTATE_H
-#define COMBATSTATE_H
+#ifndef RUNSTATE_H
+#define RUNSTATE_H
 
 #include "GameState.h"
 #include "Sprite.h"
 #include "InputManager.h"
 
-class CombatState : public cgf::GameState
+class RunState : public cgf::GameState
 {
     public:
 
@@ -26,18 +26,18 @@ class CombatState : public cgf::GameState
         void draw(cgf::Game* game);
 
         // Implement Singleton Pattern
-        static CombatState* instance()
+        static RunState* instance()
         {
-            return &m_CombatState;
+            return &m_RunState;
         }
 
     protected:
 
-        CombatState() {}
+        RunState() {}
 
     private:
 
-        static CombatState m_CombatState;
+        static RunState m_RunState;
 
         int dirx, diry;
 

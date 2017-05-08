@@ -1,5 +1,5 @@
 /*
- *  CombatState.cpp
+ *  GameState.cpp
  *  Estado de combate (jogador contra jogador);
  *
  */
@@ -7,14 +7,14 @@
 #include <iostream>
 #include <cmath>
 #include "Game.h"
-#include "CombatState.h"
+#include "RunState.h"
 #include "InputManager.h"
 
-CombatState CombatState::m_CombatState;
+RunState RunState::m_RunState;
 
 using namespace std;
 
-void CombatState::init()
+void RunState::init()
 {
     backgroundSprite.load("BackGroundImages/CityClean3.png");
     player1.load("Sprites/Spidey1.png");
@@ -36,22 +36,22 @@ void CombatState::init()
     cout << "EstadoCombate: Init" << endl;
 }
 
-void CombatState::cleanup()
+void RunState::cleanup()
 {
     cout << "EstadoCombate: Clean" << endl;
 }
 
-void CombatState::pause()
+void RunState::pause()
 {
     cout << "EstadoCombate: Paused" << endl;
 }
 
-void CombatState::resume()
+void RunState::resume()
 {
     cout << "EstadoCombate: Resumed" << endl;
 }
 
-void CombatState::handleEvents(cgf::Game* game)
+void RunState::handleEvents(cgf::Game* game)
 {
     screen = game->getScreen();
     sf::Event event;
@@ -86,12 +86,12 @@ void CombatState::handleEvents(cgf::Game* game)
     player1.setYspeed(350*diry);
 }
 
-void CombatState::update(cgf::Game* game)
+void RunState::update(cgf::Game* game)
 {
     player1.update(game->getUpdateInterval());
 }
 
-void CombatState::draw(cgf::Game* game)
+void RunState::draw(cgf::Game* game)
 {
     screen = game->getScreen();
     backgroundSprite.setPosition(0,0);

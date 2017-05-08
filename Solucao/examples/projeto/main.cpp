@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 {
     cgf::Game game(5,30);
 
-	game.init("JoaoFighter",1000,600,false);
+	game.init("Run, Spidey",1000,600,false);
 
     game.changeState(MenuState::instance());
 
