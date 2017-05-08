@@ -124,10 +124,11 @@
 		<Unit filename="JoaoFighters.layout" />
 		<Unit filename="JoaoFighters.pro" />
 		<Unit filename="JoaoFighters.user" />
-		<Unit filename="States/CombatState.h" />
-		<Unit filename="States/GameState.cpp" />
 		<Unit filename="States/MenuState.cpp" />
 		<Unit filename="States/MenuState.h" />
+		<Unit filename="States/RunState" />
+		<Unit filename="States/RunState.cpp" />
+		<Unit filename="States/RunState.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -9,16 +9,20 @@
 #include "Game.h"
 #include "RunState.h"
 #include "InputManager.h"
+#include <sstream>
 
 RunState RunState::m_RunState;
 
 using namespace std;
 
+// Sprites path
+const char* SpiderMan = "Sprites/Spidey1.png";
+
 void RunState::init()
 {
     backgroundSprite.load("BackGroundImages/CityClean3.png");
-    player1.load("Sprites/Spidey1.png");
-    player1.setPosition(10,500);
+    player.load(SpiderMan);
+    player.setPosition(10,500);
 
     dirx = 0; // direção do sprite: para a direita (1), esquerda (-1)
     diry = 0; // baixo (1), cima (-1)
@@ -32,6 +36,22 @@ void RunState::init()
     im->addKeyInput("quit", sf::Keyboard::Escape);
     im->addKeyInput("stats", sf::Keyboard::S);
     im->addMouseInput("rightclick", sf::Mouse::Right);
+
+    // Start default values
+    runSpeed = 1.0;
+    score = 0;
+
+        //Loading fonts and texts
+    if (!font.loadFromFile("data/fonts/arial.ttf")) {
+        cout << "Cannot load arial.ttf font!" << endl;
+        exit(1);
+    }
+
+    scoreLabel.setFont(font);
+    scoreLabel.setCharacterSize(42); // in pixels
+    scoreLabel.setFillColor(sf::Color::Red);
+    scoreLabel.setStyle(sf::Text::Bold);
+    scoreLabel.setPosition(0, 0);
 
     cout << "EstadoCombate: Init" << endl;
 }
@@ -82,13 +102,19 @@ void RunState::handleEvents(cgf::Game* game)
     if(im->testEvent("stats"))
         game->toggleStats();
 
-    player1.setXspeed(350*dirx);
-    player1.setYspeed(350*diry);
+    player.setXspeed(350*dirx);
+    player.setYspeed(350*diry);
 }
 
 void RunState::update(cgf::Game* game)
 {
-    player1.update(game->getUpdateInterval());
+    player.update(game->getUpdateInterval());
+}
+
+void RunState::updateScoreLabel() {
+    ostringstream convert;   // stream used for the conversion
+    convert << score;      // insert the textual representation of 'Number' in the characters in the stream
+    scoreLabel.setString(convert.str());
 }
 
 void RunState::draw(cgf::Game* game)
@@ -96,7 +122,15 @@ void RunState::draw(cgf::Game* game)
     screen = game->getScreen();
     backgroundSprite.setPosition(0,0);
     backgroundSprite.setScale(0.8, 0.50);
-    player1.setScale(1.5, 1.5);
+
+    score += 1;
+    if (score % 10 == 0) {
+        runSpeed += 1;
+    }
+
+    updateScoreLabel();
+    player.setScale(1.5, 1.5);
     screen->draw(backgroundSprite);
-    screen->draw(player1);
+    screen->draw(player);
+    screen->draw(scoreLabel);
 }

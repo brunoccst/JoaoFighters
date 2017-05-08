@@ -1104,7 +1104,7 @@
 	<SFML/System/Time.hpp>
 	<SFML/System/Clock.hpp>
 
-1494278124 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\menustate.h
+1494278272 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\menustate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -1159,7 +1159,7 @@
 	"Sprite.h"
 	"InputManager.h"
 
-1494278179 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\menustate.cpp
+1494278533 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\menustate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
@@ -1168,17 +1168,18 @@
 	"InputManager.h"
 	"../Constants.h"
 
-1494278088 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.h
+1494279590 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
 
-1494277369 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\constants.h
+1494278717 c:\users\14104872\desktop\runspidey\solucao\examples\projeto\constants.h
 
-1494278189 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.cpp
+1494279681 source:c:\users\14104872\desktop\runspidey\solucao\examples\projeto\states\runstate.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
 	"RunState.h"
 	"InputManager.h"
+	<sstream>
 

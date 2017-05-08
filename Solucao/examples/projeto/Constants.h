@@ -5,5 +5,4 @@
 // Game information
 const char* GameTitle = "Run, Spidey";
 
-
 #endif

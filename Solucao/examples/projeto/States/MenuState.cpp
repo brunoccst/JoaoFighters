@@ -18,7 +18,7 @@ MenuState MenuState::m_MenuState;
 const char* StartGameText = "Press Space to Play";
 
 // Sprites path
-const char* BackgroundImage = "BackGroundImages/CityNight2.png";
+const char* RunStateBackground = "BackGroundImages/CityNight2.png";
 
 using namespace std;
 
@@ -26,7 +26,7 @@ void MenuState::init()
 {
     //Loading background image
     im = cgf::InputManager::instance();
-    backgroundSprite.load(BackgroundImage);
+    backgroundSprite.load(RunStateBackground);
 
     //Loading fonts and texts
     if (!font.loadFromFile("data/fonts/arial.ttf")) {

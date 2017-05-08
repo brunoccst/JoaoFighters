@@ -40,14 +40,20 @@ class RunState : public cgf::GameState
         static RunState m_RunState;
 
         int dirx, diry;
+        float runSpeed;
+        int score;
+
+        void updateScoreLabel();
 
         // Jogadores
-        cgf::Sprite player1;
-        cgf::Sprite player2;
+        cgf::Sprite player;
 
         sf::RenderWindow* screen;
         cgf::Sprite backgroundSprite;
         cgf::InputManager* im;
+
+        sf::Font font;
+        sf::Text scoreLabel;
 };
 
 #endif // COMBATSTATE_H
