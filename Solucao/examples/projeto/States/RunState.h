@@ -41,9 +41,12 @@ class RunState : public cgf::GameState
 
         int dirx, diry;
         int score;
+        int originalX, originalY, maxY;
         float runSpeed;
         float backgroundX;
         float backgroundXSize;
+        bool pulando;
+        bool caindo;
 
         void updateScoreLabel();
         void updateBackgroundImage();

@@ -13,14 +13,16 @@
 #include "Game.h"
 #include "States/MenuState.h"
 
+const char* WindowName = "Run, Spidey";
+
 int main(int argc, char **argv)
 {
     cgf::Game game(5,30);
 
-	game.init("Run, Spidey",1000,600,false);
+	game.init(WindowName,1000,600,false);
 
+    // Inicia no estado "menu"
     game.changeState(MenuState::instance());
-
 	while(game.isRunning())
 	{
 		game.handleEvents();

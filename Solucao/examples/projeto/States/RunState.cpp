@@ -21,12 +21,10 @@ const char* SpiderMan = "Sprites/Spidey1.png";
 void RunState::init()
 {
     // Carrega background
-    char* backgroundImage = "BackGroundImages/CityClean3.png";
-
-    backgroundSprite1.load(backgroundImage);
+    backgroundSprite1.load("BackGroundImages/CityClean3.png");
     backgroundSprite1.setScale(0.8, 0.50);
 
-    backgroundSprite2.load(backgroundImage);
+    backgroundSprite2.load("BackGroundImages/CityClean3.png");
     backgroundSprite2.setScale(0.8, 0.50);
 
     backgroundX = 0.0;
@@ -34,11 +32,15 @@ void RunState::init()
     updateBackgroundImage();
 
     // Carrega player
-    player.load(SpiderMan);
-    player.setPosition(10,500);
+    originalX = 100;
+    originalY = 500;
+    maxY = originalY - 100;
 
-    dirx = 0; // direção do sprite: para a direita (1), esquerda (-1)
-    diry = 0; // baixo (1), cima (-1)
+    player.load(SpiderMan);
+    player.setPosition(originalX,originalY);
+    player.setScale(1.5, 1.5);
+    pulando = false;
+    caindo = false;
 
     im = cgf::InputManager::instance();
 
@@ -51,7 +53,7 @@ void RunState::init()
     im->addMouseInput("rightclick", sf::Mouse::Right);
 
     // Start default values
-    runSpeed = 1.0;
+    runSpeed = 0.1;
     score = 0;
 
         //Loading fonts and texts
@@ -95,33 +97,78 @@ void RunState::handleEvents(cgf::Game* game)
             game->quit();
     }
 
-    dirx = diry = 0;
-
-    if(im->testEvent("left"))
-        dirx = -1;
-
-    if(im->testEvent("right"))
-        dirx = 1;
-
+    // Ativa o "pulo" pressionando a tecla de seta para cima
     if(im->testEvent("up"))
-        diry = -1;
+    {
+        if (!pulando) {
+            pulando = true;
+        }
+    }
 
-    if(im->testEvent("down"))
-        diry = 1;
+    // TODO: implementar botao "enter" para pausar
+//    if(im->testEvent("enter"))
+//        game->changeState(PauseState::instance());
 
     if(im->testEvent("quit") || im->testEvent("rightclick"))
         game->quit();
 
     if(im->testEvent("stats"))
         game->toggleStats();
-
-    player.setXspeed(350*dirx);
-    player.setYspeed(350*diry);
 }
 
 void RunState::update(cgf::Game* game)
 {
     player.update(game->getUpdateInterval());
+
+    // Incrementa score
+    score += 1;
+
+    // Aumenta a velocidade a cada marca de score
+    switch (score) {
+        case 250:
+            runSpeed += 0.1;
+            break;
+        case 500:
+            runSpeed += 0.05;
+            break;
+        case 1000:
+            runSpeed += 0.05;
+            break;
+        case 2000:
+            runSpeed += 0.05;
+            break;
+        case 4000:
+            runSpeed += 0.05;
+            break;
+        case 8000:
+            runSpeed += 0.05;
+            break;
+    }
+
+    // Se estiver no estado "pulando"..
+    if (pulando) {
+        // Se estiver caindo, continua caindo ate chegar ao solo
+        if (caindo) {
+            cout << "Caindo" << endl;
+            player.setPosition(player.getPosition().x, player.getPosition().y + 10);
+        }
+        // Se nao, continua subindo no pulo
+        else {
+            player.setPosition(player.getPosition().x, player.getPosition().y - 10);
+            cout << "Pulando" << endl;
+        }
+
+        // Se chegou ao maximo Y, comeca a descer
+        if (player.getPosition().y <= maxY){
+            cout << "Chegou ao maximo Y, comecando a cair" << endl;
+            caindo = true;
+        }
+        else if (player.getPosition().y >= originalY) {
+            cout << "Chegou ao solo, pode pular novamente" << endl;
+            pulando = false;
+            caindo = false;
+        }
+    }
 }
 
 void RunState::updateScoreLabel() {
@@ -133,7 +180,7 @@ void RunState::updateScoreLabel() {
 void RunState::updateBackgroundImage(){
     backgroundSprite1.setPosition(backgroundX, 0);
     backgroundSprite2.setPosition(backgroundX + backgroundXSize, 0);
-    backgroundX -= 0.1;
+    backgroundX -= runSpeed;
     if (0 - backgroundX >=  backgroundXSize)
     {
         backgroundX = 0;
@@ -143,17 +190,10 @@ void RunState::updateBackgroundImage(){
 void RunState::draw(cgf::Game* game)
 {
     screen = game->getScreen();
-    backgroundSprite1.setPosition(0,0);
-
-
-    score += 1;
-    if (score % 10 == 0) {
-        runSpeed += 1;
-    }
 
     updateScoreLabel();
     updateBackgroundImage();
-    player.setScale(1.5, 1.5);
+
     screen->draw(backgroundSprite1);
     screen->draw(backgroundSprite2);
     screen->draw(player);
