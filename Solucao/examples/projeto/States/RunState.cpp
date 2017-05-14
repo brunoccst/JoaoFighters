@@ -12,6 +12,7 @@
 #include <sstream>
 #include "ObstaculoFactory.h"
 #include "Sprite.h"
+#include "EndGameState.h"
 
 RunState RunState::m_RunState;
 
@@ -120,22 +121,17 @@ void RunState::handleEvents(cgf::Game* game)
         game->toggleStats();
 }
 
-void RunState::update(cgf::Game* game)
-{
-    player.update(game->getUpdateInterval());
+// Aumenta a velocidade a cada marca de score
+void RunState::aumentaVelocidade() {
 
-    // Incrementa score
-    score += 1;
-
-    // Aumenta a velocidade a cada marca de score
     switch (score) {
-        case 250:
+        case 500:
             runSpeed += 0.1;
             break;
-        case 500:
+        case 1000:
             runSpeed += 0.05;
             break;
-        case 1000:
+        case 1500:
             runSpeed += 0.05;
             break;
         case 2000:
@@ -148,44 +144,53 @@ void RunState::update(cgf::Game* game)
             runSpeed += 0.05;
             break;
     }
+}
 
+// Atualiza conforme o estado do personagem (pulando, caindo ou no solo)
+void RunState::atualizaPersonagem() {
     // Se estiver no estado "pulando"..
     if (pulando) {
         // Se estiver caindo, continua caindo ate chegar ao solo
         if (caindo) {
-            cout << "Caindo" << endl;
+            //cout << "Caindo" << endl;
             player.setPosition(player.getPosition().x, player.getPosition().y + 10);
         }
         // Se nao, continua subindo no pulo
         else {
             player.setPosition(player.getPosition().x, player.getPosition().y - 10);
-            cout << "Pulando" << endl;
+            //cout << "Pulando" << endl;
         }
 
         // Se chegou ao maximo Y, comeca a descer
         if (player.getPosition().y <= maxY){
-            cout << "Chegou ao maximo Y, comecando a cair" << endl;
+            //cout << "Chegou ao maximo Y, comecando a cair" << endl;
             caindo = true;
         }
         else if (player.getPosition().y >= originalY) {
-            cout << "Chegou ao solo, pode pular novamente" << endl;
+            //cout << "Chegou ao solo, pode pular novamente" << endl;
             pulando = false;
             caindo = false;
         }
     }
+}
 
-    // Cria novos objetos, se necessario
+// Cria novos objetos, se necessario
+void RunState::tentaAdicionarObstaculo() {
     Obstaculo obs = geradorDeObstaculos.CriaObstaculo();
     if (obs.Carregado) {
         obs.sprite.setPosition(950, originalY);
         obstaculos.push_back(obs);
         cout << "Objeto adicionado. Total: " << obstaculos.size() << endl;
     }
+}
 
-
+bool RunState::atualizaObstaculos()
+{
     Obstaculo* obsIteration;
-    for (int i = 0; i < obstaculos.size(); i++) {
-        obsIteration = &obstaculos.at(i);
+
+    for(std::vector<int>::size_type i = 0; i != obstaculos.size(); i++) {
+        //cout << "obstaculos numero " << i << endl;
+        obsIteration = &obstaculos[i];
 
         // Desloca objetos
         obsIteration->sprite.setPosition(obsIteration->sprite.getPosition().x - (runSpeed * 40), originalY);
@@ -199,14 +204,32 @@ void RunState::update(cgf::Game* game)
         )
         {
             cout << "Colidiu! FIM DE JOGO!" << endl;
-            //game->changeState(EndGame::instance());
+            return true;
         }
 
         // Destroi obstaculo se saiu da area
         if (obsIteration->sprite.getPosition().x < 0) {
             obstaculos.erase(obstaculos.begin() + i);
+            i--;
+            cout << "Deletou objeto!" << endl;
         }
     }
+
+    return false;
+}
+
+void RunState::update(cgf::Game* game)
+{
+    player.update(game->getUpdateInterval());
+
+    // Incrementa score
+    score += 1;
+    aumentaVelocidade();
+    atualizaPersonagem();
+    if (atualizaObstaculos()) {
+        game->changeState(EndGameState::instance());
+    }
+    tentaAdicionarObstaculo();
 }
 
 void RunState::updateScoreLabel() {

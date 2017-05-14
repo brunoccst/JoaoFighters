@@ -140,6 +140,8 @@
 		<Unit filename="Modelos/Obstaculo.h" />
 		<Unit filename="Modelos/SpiderMan.cpp" />
 		<Unit filename="Modelos/SpiderMan.h" />
+		<Unit filename="States/EndGameState.cpp" />
+		<Unit filename="States/EndGameState.h" />
 		<Unit filename="States/MenuState.cpp" />
 		<Unit filename="States/MenuState.h" />
 		<Unit filename="States/RunState" />

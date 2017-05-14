@@ -29,7 +29,7 @@ Obstaculo ObstaculoFactory::CriaObstaculo()
     }
     else
     {
-        cout << "Nao gerou objeto" << endl;
+        //cout << "Nao gerou objeto" << endl;
         return Obstaculo();
     }
 

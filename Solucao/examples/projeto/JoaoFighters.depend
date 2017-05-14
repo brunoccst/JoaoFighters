@@ -1835,7 +1835,7 @@
 	"InputManager.h"
 	"../Constants.h"
 
-1494791076 /home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.h
+1494799415 /home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -1844,7 +1844,7 @@
 
 1494698888 /home/bruno/RunSpidey/Solucao/examples/projeto/Constants.h
 
-1494794921 source:/home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.cpp
+1494800451 source:/home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.cpp
 	<iostream>
 	<cmath>
 	"Game.h"
@@ -1853,6 +1853,7 @@
 	<sstream>
 	"ObstaculoFactory.h"
 	"Sprite.h"
+	"EndGameState.h"
 
 1494791971 source:/home/bruno/RunSpidey/Solucao/examples/projeto/Modelos/Obstaculo.cpp
 	"Obstaculo.h"
@@ -1871,7 +1872,7 @@
 1494715846 /home/bruno/RunSpidey/Solucao/examples/projeto/Modelos/Caixa.h
 	"Obstaculo.h"
 
-1494793242 source:/home/bruno/RunSpidey/Solucao/examples/projeto/Auxiliar/ObstaculoFactory.cpp
+1494799835 source:/home/bruno/RunSpidey/Solucao/examples/projeto/Auxiliar/ObstaculoFactory.cpp
 	"ObstaculoFactory.h"
 	"Caixa.h"
 	<iostream>
@@ -1879,4 +1880,16 @@
 1494790823 /home/bruno/RunSpidey/Solucao/examples/projeto/Auxiliar/ObstaculoFactory.h
 	"Obstaculo.h"
 	"Caixa.h"
+
+1494798926 source:/home/bruno/RunSpidey/Solucao/examples/projeto/States/EndGameState.cpp
+	"Game.h"
+	"EndGameState.h"
+	<iostream>
+	<cstring>
+	"RunState.h"
+
+1494795157 /home/bruno/RunSpidey/Solucao/examples/projeto/States/EndGameState.h
+	"GameState.h"
+	"Sprite.h"
+	"InputManager.h"
 

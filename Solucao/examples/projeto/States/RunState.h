@@ -52,6 +52,10 @@ class RunState : public cgf::GameState
 
         void updateScoreLabel();
         void updateBackgroundImage();
+        void aumentaVelocidade();
+        void atualizaPersonagem();
+        void tentaAdicionarObstaculo();
+        bool atualizaObstaculos();
 
         std::vector<Obstaculo> obstaculos;
         ObstaculoFactory geradorDeObstaculos;

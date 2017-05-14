@@ -4,29 +4,23 @@
  *
  */
 
-#include <iostream>
-#include <cmath>
-#include <cstring>
 #include "Game.h"
-#include "MenuState.h"
+#include "EndGameState.h"
+#include <iostream>
+#include <cstring>
 #include "RunState.h"
-#include "InputManager.h"
-#include "../Constants.h"
 
-MenuState MenuState::m_MenuState;
+
+EndGameState EndGameState::m_EndGameState;
 
 // General constants
-const char* StartGameText = "Pressione o botao [Espaco] para iniciar";
-const char* RunStateBackground = "BackGroundImages/CityNight2.png";
+const char* EndGameText = "Fim de jogo";
 
 using namespace std;
 
-void MenuState::init()
+void EndGameState::init()
 {
     im = cgf::InputManager::instance();
-
-    // Carrega o sprite de background
-    backgroundSprite.load(RunStateBackground);
 
     // Carrega as fontes
     if (!font.loadFromFile("data/fonts/arial.ttf")) {
@@ -35,38 +29,29 @@ void MenuState::init()
     }
 
     // Configura o titulo do jogo
-    titleLabel.setFont(font);
-    titleLabel.setString(GameTitle);
-    titleLabel.setCharacterSize(32); // in pixels
-    titleLabel.setFillColor(sf::Color::Red);
-    titleLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
-
-    // Configura o texto de inicializacao
-    startGameLabel.setFont(font);
-    startGameLabel.setString(StartGameText);
-    startGameLabel.setCharacterSize(32); // in pixels
-    startGameLabel.setFillColor(sf::Color::Red);
-    startGameLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
+    endLabel.setFont(font);
+    endLabel.setString(EndGameText);
+    endLabel.setCharacterSize(32); // in pixels
+    endLabel.setFillColor(sf::Color::Red);
+    endLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
-void MenuState::cleanup()
+void EndGameState::cleanup()
 {
     cout << "MenuState: Clean" << endl;
 }
 
-void MenuState::pause()
+void EndGameState::pause()
 {
     cout << "MenuState: Paused" << endl;
 }
 
-void MenuState::resume()
+void EndGameState::resume()
 {
     cout << "MenuState: Resumed" << endl;
 }
 
-void MenuState::handleEvents(cgf::Game* game)
+void EndGameState::handleEvents(cgf::Game* game)
 {
     sf::Event event;
     sf::RenderWindow* screen = game->getScreen();
@@ -85,8 +70,8 @@ void MenuState::handleEvents(cgf::Game* game)
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::Escape)
                 game->quit();
-            else if(event.key.code == sf::Keyboard::Space)
-                game->changeState(RunState::instance());
+//            else if(event.key.code == sf::Keyboard::Space)
+//                game->changeState(RunState::instance());
             break;
 
         default:
@@ -95,27 +80,19 @@ void MenuState::handleEvents(cgf::Game* game)
     }
 }
 
-void MenuState::update(cgf::Game* game)
+void EndGameState::update(cgf::Game* game)
 {
 
 }
 
-void MenuState::draw(cgf::Game* game)
+void EndGameState::draw(cgf::Game* game)
 {
     // Pega as configuracoes de tela do jogo
     screen = game->getScreen();
 
-    // Desenha o background na tela
-    backgroundSprite.setPosition(0,0);
-    backgroundSprite.setScale(0.75, 0.64);
-    screen->draw(backgroundSprite);
-
     // Desenha os textos na tela
     float screenX = screen->getSize().x;
 
-    titleLabel.setPosition((screenX / 2) - strlen(GameTitle) * 7, 200);
-    screen->draw(titleLabel);
-
-    startGameLabel.setPosition((screenX / 2) - strlen(StartGameText) * 7, 250);
-    screen->draw(startGameLabel);
+    endLabel.setPosition((screenX / 2) - strlen(EndGameText) * 7, 200);
+    screen->draw(endLabel);
 }
