@@ -10,6 +10,8 @@
 #include "GameState.h"
 #include "Sprite.h"
 #include "InputManager.h"
+#include "Obstaculo.h"
+#include "ObstaculoFactory.h"
 
 class RunState : public cgf::GameState
 {
@@ -50,6 +52,9 @@ class RunState : public cgf::GameState
 
         void updateScoreLabel();
         void updateBackgroundImage();
+
+        std::vector<Obstaculo> obstaculos;
+        ObstaculoFactory geradorDeObstaculos;
 
         // Jogadores
         cgf::Sprite player;

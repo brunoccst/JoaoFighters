@@ -10,6 +10,8 @@
 #include "RunState.h"
 #include "InputManager.h"
 #include <sstream>
+#include "ObstaculoFactory.h"
+#include "Sprite.h"
 
 RunState RunState::m_RunState;
 
@@ -67,6 +69,8 @@ void RunState::init()
     scoreLabel.setFillColor(sf::Color::Red);
     scoreLabel.setStyle(sf::Text::Bold);
     scoreLabel.setPosition(0, 0);
+
+    geradorDeObstaculos = ObstaculoFactory();
 
     cout << "EstadoCombate: Init" << endl;
 }
@@ -169,6 +173,40 @@ void RunState::update(cgf::Game* game)
             caindo = false;
         }
     }
+
+    // Cria novos objetos, se necessario
+    Obstaculo obs = geradorDeObstaculos.CriaObstaculo();
+    if (obs.Carregado) {
+        obs.sprite.setPosition(950, originalY);
+        obstaculos.push_back(obs);
+        cout << "Objeto adicionado. Total: " << obstaculos.size() << endl;
+    }
+
+
+    Obstaculo* obsIteration;
+    for (int i = 0; i < obstaculos.size(); i++) {
+        obsIteration = &obstaculos.at(i);
+
+        // Desloca objetos
+        obsIteration->sprite.setPosition(obsIteration->sprite.getPosition().x - (runSpeed * 40), originalY);
+
+        // Valida colisao
+        if (
+            obsIteration->sprite.getPosition().x <= player.getPosition().x + 5 &&
+            obsIteration->sprite.getPosition().x >= player.getPosition().x &&
+            obsIteration->sprite.getPosition().y <= player.getPosition().y + 5 &&
+            obsIteration->sprite.getPosition().y >= player.getPosition().y
+        )
+        {
+            cout << "Colidiu! FIM DE JOGO!" << endl;
+            //game->changeState(EndGame::instance());
+        }
+
+        // Destroi obstaculo se saiu da area
+        if (obsIteration->sprite.getPosition().x < 0) {
+            obstaculos.erase(obstaculos.begin() + i);
+        }
+    }
 }
 
 void RunState::updateScoreLabel() {
@@ -197,5 +235,11 @@ void RunState::draw(cgf::Game* game)
     screen->draw(backgroundSprite1);
     screen->draw(backgroundSprite2);
     screen->draw(player);
+
+    // Desenha os obstaculos
+    for (int i = 0; i < obstaculos.size(); i++) {
+        screen->draw(obstaculos[i].sprite);
+    }
+
     screen->draw(scoreLabel);
 }

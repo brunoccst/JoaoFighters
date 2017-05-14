@@ -16,6 +16,8 @@
 					<Add option="-g" />
 					<Add directory="Estados/Headers" />
 					<Add directory="Estados" />
+					<Add directory="Modelos" />
+					<Add directory="Auxiliar" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics" />
@@ -40,6 +42,8 @@
 					<Add option="-O2" />
 					<Add directory="Estados/Headers" />
 					<Add directory="Estados" />
+					<Add directory="Modelos" />
+					<Add directory="Auxiliar" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -64,6 +68,8 @@
 					<Add option="-g" />
 					<Add directory="Estados/Headers" />
 					<Add directory="Estados" />
+					<Add directory="Modelos" />
+					<Add directory="Auxiliar" />
 				</Compiler>
 				<Linker>
 					<Add library="../../bin/sfml-graphics-2.dll" />
@@ -90,6 +96,8 @@
 					<Add option="-O2" />
 					<Add directory="Estados/Headers" />
 					<Add directory="Estados" />
+					<Add directory="Modelos" />
+					<Add directory="Auxiliar" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -119,11 +127,19 @@
 		<Linker>
 			<Add directory="../../lib" />
 		</Linker>
+		<Unit filename="Auxiliar/ObstaculoFactory.cpp" />
+		<Unit filename="Auxiliar/ObstaculoFactory.h" />
 		<Unit filename="Constants.h" />
 		<Unit filename="JoaoFighters.depend" />
 		<Unit filename="JoaoFighters.layout" />
 		<Unit filename="JoaoFighters.pro" />
 		<Unit filename="JoaoFighters.user" />
+		<Unit filename="Modelos/Caixa.cpp" />
+		<Unit filename="Modelos/Caixa.h" />
+		<Unit filename="Modelos/Obstaculo.cpp" />
+		<Unit filename="Modelos/Obstaculo.h" />
+		<Unit filename="Modelos/SpiderMan.cpp" />
+		<Unit filename="Modelos/SpiderMan.h" />
 		<Unit filename="States/MenuState.cpp" />
 		<Unit filename="States/MenuState.h" />
 		<Unit filename="States/RunState" />
