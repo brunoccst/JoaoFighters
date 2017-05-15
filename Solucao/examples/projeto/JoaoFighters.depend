@@ -1306,7 +1306,7 @@
 	<cstring>
 	"RunState.h"
 
-1494795157 /home/bruno/RunSpidey/Solucao/examples/projeto/States/EndGameState.h
+1494871480 /home/bruno/RunSpidey/Solucao/examples/projeto/States/EndGameState.h
 	"GameState.h"
 	"Sprite.h"
 	"InputManager.h"
@@ -1338,7 +1338,7 @@
 
 1494865243 /home/bruno/RunSpidey/Solucao/examples/projeto/Modelos/SpiderMan.h
 
-1494870411 source:/home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.cpp
+1494871404 source:/home/bruno/RunSpidey/Solucao/examples/projeto/States/RunState.cpp
 	<iostream>
 	<cmath>
 	"Game.h"

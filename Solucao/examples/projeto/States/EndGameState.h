@@ -26,8 +26,9 @@ class EndGameState : public cgf::GameState
         void draw(cgf::Game* game);
 
         // Implement Singleton Pattern
-        static EndGameState* instance()
+        static EndGameState* instance(int score)
         {
+            m_EndGameState.score = score;
             return &m_EndGameState;
         }
 
@@ -46,6 +47,7 @@ class EndGameState : public cgf::GameState
 
         sf::Font font;
         sf::Text endLabel;
+        sf::Text scoreLabel;
 };
 
 #endif // ENDGAMESTATE_H

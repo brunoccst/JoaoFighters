@@ -24,10 +24,10 @@ const char* SpiderMan = "Sprites/Spidey1.png";
 void RunState::init()
 {
     // Carrega background
-    backgroundSprite1.load("BackGroundImages/CityClean3.png");
+    backgroundSprite1.load("BackGroundImages/CityNight3.png");
     backgroundSprite1.setScale(0.8, 0.50);
 
-    backgroundSprite2.load("BackGroundImages/CityClean3.png");
+    backgroundSprite2.load("BackGroundImages/CityNight3.png");
     backgroundSprite2.setScale(0.8, 0.50);
 
     backgroundX = 0.0;
@@ -247,7 +247,7 @@ void RunState::update(cgf::Game* game)
     aumentaVelocidade();
     atualizaPersonagem();
     if (atualizaObstaculos()) {
-        game->changeState(EndGameState::instance());
+        game->changeState(EndGameState::instance(score));
     }
     tentaAdicionarObstaculo();
 }

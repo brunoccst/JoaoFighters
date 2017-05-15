@@ -9,7 +9,7 @@
 #include <iostream>
 #include <cstring>
 #include "RunState.h"
-
+#include <string>
 
 EndGameState EndGameState::m_EndGameState;
 
@@ -34,6 +34,12 @@ void EndGameState::init()
     endLabel.setCharacterSize(32); // in pixels
     endLabel.setFillColor(sf::Color::Red);
     endLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    scoreLabel.setFont(font);
+    scoreLabel.setString(std::to_string(score));
+    scoreLabel.setCharacterSize(32); // in pixels
+    scoreLabel.setFillColor(sf::Color::Red);
+    scoreLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 }
 
 void EndGameState::cleanup()
@@ -95,4 +101,7 @@ void EndGameState::draw(cgf::Game* game)
 
     endLabel.setPosition((screenX / 2) - strlen(EndGameText) * 7, 200);
     screen->draw(endLabel);
+
+    scoreLabel.setPosition((screenX / 2) - strlen(EndGameText), 300);
+    screen->draw(scoreLabel);
 }
