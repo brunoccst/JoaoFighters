@@ -37,11 +37,15 @@ void RunState::init()
     // Carrega player
     originalX = 100;
     originalY = 500;
-    maxY = originalY - 100;
+    maxY = originalY - 160;
 
-    player.load(SpiderMan);
-    player.setPosition(originalX,originalY);
-    player.setScale(1.5, 1.5);
+    player.loadXML("Sprites/SpideyRunXML.xml");
+    player.loadAnimation("Sprites/SpideyAnim.xml");
+    player.setAnimRate(10);
+    player.setAnimation("run");
+    player.setPosition(originalX,originalY-40);
+    player.setScale(0.7, 0.7);
+    player.play();
     pulando = false;
     caindo = false;
 
@@ -149,7 +153,13 @@ void RunState::aumentaVelocidade() {
 // Atualiza conforme o estado do personagem (pulando, caindo ou no solo)
 void RunState::atualizaPersonagem() {
     // Se estiver no estado "pulando"..
-    if (pulando) {
+    if (pulando){
+        //Animaçao Pulo
+        player.loadXML("Sprites/SpideyJumpXML.xml");
+        player.loadAnimation("Sprites/SpideyAnim.xml");
+        player.setAnimRate(10);
+        player.setAnimation("jump");
+        player.play();
         // Se estiver caindo, continua caindo ate chegar ao solo
         if (caindo) {
             //cout << "Caindo" << endl;
@@ -170,6 +180,12 @@ void RunState::atualizaPersonagem() {
             //cout << "Chegou ao solo, pode pular novamente" << endl;
             pulando = false;
             caindo = false;
+            player.loadXML("Sprites/SpideyRunXML.xml");
+            player.loadAnimation("Sprites/SpideyAnim.xml");
+            player.setAnimRate(10);
+            player.setPosition(originalX,originalY-40);
+            player.setAnimation("run");
+            player.play();
         }
     }
 }
@@ -199,8 +215,8 @@ bool RunState::atualizaObstaculos()
         if (
             obsIteration->sprite.getPosition().x <= player.getPosition().x + 5 &&
             obsIteration->sprite.getPosition().x >= player.getPosition().x &&
-            obsIteration->sprite.getPosition().y <= player.getPosition().y + 5 &&
-            obsIteration->sprite.getPosition().y >= player.getPosition().y
+            obsIteration->sprite.getPosition().y <= player.getPosition().y + 45 &&
+            obsIteration->sprite.getPosition().y >= player.getPosition().y + 40
         )
         {
             cout << "Colidiu! FIM DE JOGO!" << endl;

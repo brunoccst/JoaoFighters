@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="../../Sprites/JumpAnim1.png" width="157" height="134">
+    <sprite n="0" x="0" y="0" w="157" h="134"/>
+</TextureAtlas>
