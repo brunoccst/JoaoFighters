@@ -44,7 +44,7 @@ void RunState::init()
     player.setAnimRate(10);
     player.setAnimation("run");
     player.setPosition(originalX,originalY-40);
-    player.setScale(0.7, 0.7);
+    player.setScale(0.5, 0.5);
     player.play();
     pulando = false;
     caindo = false;
@@ -203,21 +203,25 @@ void RunState::tentaAdicionarObstaculo() {
 bool RunState::atualizaObstaculos()
 {
     Obstaculo* obsIteration;
-
+    sf::Vector2f posObstaculo, posPlayer;
+    posPlayer = player.getPosition();
     for(std::vector<int>::size_type i = 0; i != obstaculos.size(); i++) {
         //cout << "obstaculos numero " << i << endl;
         obsIteration = &obstaculos[i];
 
         // Desloca objetos
         obsIteration->sprite.setPosition(obsIteration->sprite.getPosition().x - (runSpeed * 40), originalY);
+        posObstaculo = obsIteration->sprite.getPosition();
 
         // Valida colisao
-        if (
-            obsIteration->sprite.getPosition().x <= player.getPosition().x + 5 &&
-            obsIteration->sprite.getPosition().x >= player.getPosition().x &&
-            obsIteration->sprite.getPosition().y <= player.getPosition().y + 45 &&
-            obsIteration->sprite.getPosition().y >= player.getPosition().y + 40
+        if
+        (
+            (
+                posPlayer.x >= posObstaculo.x - 50 && posPlayer.x <= posObstaculo.x
+                && posPlayer.y >= posObstaculo.y - 50 && posPlayer.y <= posObstaculo.y
+            )
         )
+
         {
             cout << "Colidiu! FIM DE JOGO!" << endl;
             return true;

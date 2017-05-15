@@ -3,6 +3,7 @@
 
 #include "Obstaculo.h"
 #include "Caixa.h"
+#include <ctime>
 
 class ObstaculoFactory
 {
@@ -12,6 +13,7 @@ class ObstaculoFactory
     protected:
     private:
         int quantidadeDeTipos;
+        unsigned int cronometro;
 };
 
 #endif // OBSTACULOFACTORY_H
