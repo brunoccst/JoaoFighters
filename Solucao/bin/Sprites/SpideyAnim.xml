@@ -8,5 +8,6 @@ loop   => looping animation (default)
 <animation name="spidey">
     <sequence name="run"  start="0" end="3" loop="true" />
     <sequence name="jump"  start="0" end="1" loop="true" />
+    <sequence name="secondjump"  start="0" end="3" loop="true" />
 </animation>
 

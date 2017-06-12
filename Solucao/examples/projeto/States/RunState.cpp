@@ -41,12 +41,14 @@ void RunState::init()
 
     player.loadXML("Sprites/SpideyRunXML.xml");
     player.loadAnimation("Sprites/SpideyAnim.xml");
-    player.setAnimRate(10);
+    player.setAnimRate(8);
     player.setAnimation("run");
     player.setPosition(originalX,originalY-40);
     player.setScale(0.5, 0.5);
     player.play();
+
     pulando = false;
+    segundoPulo = false;
     caindo = false;
 
     im = cgf::InputManager::instance();
@@ -56,6 +58,7 @@ void RunState::init()
     im->addKeyInput("up", sf::Keyboard::Up);
     im->addKeyInput("down", sf::Keyboard::Down);
     im->addKeyInput("quit", sf::Keyboard::Escape);
+    im->addKeyInput("space", sf::Keyboard::Space);
     im->addKeyInput("stats", sf::Keyboard::S);
     im->addMouseInput("rightclick", sf::Mouse::Right);
 
@@ -77,22 +80,22 @@ void RunState::init()
 
     geradorDeObstaculos = ObstaculoFactory();
 
-    cout << "EstadoCombate: Init" << endl;
+    //cout << "EstadoCombate: Init" << endl;
 }
 
 void RunState::cleanup()
 {
-    cout << "EstadoCombate: Clean" << endl;
+    //cout << "EstadoCombate: Clean" << endl;
 }
 
 void RunState::pause()
 {
-    cout << "EstadoCombate: Paused" << endl;
+    //cout << "EstadoCombate: Paused" << endl;
 }
 
 void RunState::resume()
 {
-    cout << "EstadoCombate: Resumed" << endl;
+    //cout << "EstadoCombate: Resumed" << endl;
 }
 
 void RunState::handleEvents(cgf::Game* game)
@@ -113,6 +116,20 @@ void RunState::handleEvents(cgf::Game* game)
             pulando = true;
         }
     }
+
+    if(im->testEvent("space"))
+    {
+        if(pulando && !segundoPulo){
+            segundoPulo = true;
+            maxY = player.getPosition().y -160;
+            player.loadXML("Sprites/SpideySecondJumpXML.xml");
+            player.loadAnimation("Sprites/SpideyAnim.xml");
+            player.setAnimRate(10);
+            player.setAnimation("secondjump");
+            player.play();
+        }
+    }
+
 
     // TODO: implementar botao "enter" para pausar
 //    if(im->testEvent("enter"))
@@ -155,31 +172,42 @@ void RunState::atualizaPersonagem() {
     // Se estiver no estado "pulando"..
     if (pulando){
         //Animaçao Pulo
-        player.loadXML("Sprites/SpideyJumpXML.xml");
-        player.loadAnimation("Sprites/SpideyAnim.xml");
-        player.setAnimRate(10);
-        player.setAnimation("jump");
-        player.play();
+
+        if(!segundoPulo){
+            player.loadXML("Sprites/SpideyJumpXML.xml");
+            player.loadAnimation("Sprites/SpideyAnim.xml");
+            player.setAnimRate(10);
+            player.setAnimation("jump");
+            player.play();
+        }
+
         // Se estiver caindo, continua caindo ate chegar ao solo
         if (caindo) {
             //cout << "Caindo" << endl;
             player.setPosition(player.getPosition().x, player.getPosition().y + 10);
+            player.loadXML("Sprites/SpideyJumpXML.xml");
+            player.loadAnimation("Sprites/SpideyAnim.xml");
+            player.setAnimRate(10);
+            player.setAnimation("jump");
+            player.play();
         }
         // Se nao, continua subindo no pulo
         else {
             player.setPosition(player.getPosition().x, player.getPosition().y - 10);
             //cout << "Pulando" << endl;
         }
-
         // Se chegou ao maximo Y, comeca a descer
         if (player.getPosition().y <= maxY){
             //cout << "Chegou ao maximo Y, comecando a cair" << endl;
             caindo = true;
         }
-        else if (player.getPosition().y >= originalY) {
+
+        if (player.getPosition().y >= originalY) {
             //cout << "Chegou ao solo, pode pular novamente" << endl;
             pulando = false;
+            segundoPulo = false;
             caindo = false;
+            maxY = originalY - 160;
             player.loadXML("Sprites/SpideyRunXML.xml");
             player.loadAnimation("Sprites/SpideyAnim.xml");
             player.setAnimRate(10);
@@ -196,7 +224,7 @@ void RunState::tentaAdicionarObstaculo() {
     if (obs.Carregado) {
         obs.sprite.setPosition(950, originalY);
         obstaculos.push_back(obs);
-        cout << "Objeto adicionado. Total: " << obstaculos.size() << endl;
+        //cout << "Objeto adicionado. Total: " << obstaculos.size() << endl;
     }
 }
 

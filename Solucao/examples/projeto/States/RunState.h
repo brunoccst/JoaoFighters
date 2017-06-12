@@ -48,6 +48,7 @@ class RunState : public cgf::GameState
         float backgroundX;
         float backgroundXSize;
         bool pulando;
+        bool segundoPulo;
         bool caindo;
 
         void updateScoreLabel();
