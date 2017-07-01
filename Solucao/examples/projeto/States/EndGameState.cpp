@@ -36,7 +36,7 @@ void EndGameState::init()
     endLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     scoreLabel.setFont(font);
-    scoreLabel.setString(std::to_string(score));
+    //scoreLabel.setString(std::to_string(score));
     scoreLabel.setCharacterSize(32); // in pixels
     scoreLabel.setFillColor(sf::Color::Red);
     scoreLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
