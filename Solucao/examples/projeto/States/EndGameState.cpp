@@ -9,12 +9,14 @@
 #include <iostream>
 #include <cstring>
 #include "RunState.h"
+#include "MenuState.h"
 #include <string>
 
 EndGameState EndGameState::m_EndGameState;
 
 // General constants
 const char* EndGameText = "Fim de jogo";
+const char* RestartText = "Aperte [Space] para recomecar o jogo";
 
 using namespace std;
 
@@ -34,6 +36,12 @@ void EndGameState::init()
     endLabel.setCharacterSize(32); // in pixels
     endLabel.setFillColor(sf::Color::Red);
     endLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    restartLabel.setFont(font);
+    restartLabel.setString(RestartText);
+    restartLabel.setCharacterSize(32); // in pixels
+    restartLabel.setFillColor(sf::Color::Red);
+    restartLabel.setStyle(sf::Text::Bold | sf::Text::Underlined);
 
     scoreLabel.setFont(font);
     //scoreLabel.setString(std::to_string(score));
@@ -76,6 +84,9 @@ void EndGameState::handleEvents(cgf::Game* game)
         case sf::Event::KeyPressed:
             if(event.key.code == sf::Keyboard::Escape)
                 game->quit();
+            if(event.key.code == sf::Keyboard::Space)
+                game->getScreen()->clear();
+                game->changeState(MenuState::instance());
 //            else if(event.key.code == sf::Keyboard::Space)
 //                game->changeState(RunState::instance());
             break;
@@ -104,4 +115,7 @@ void EndGameState::draw(cgf::Game* game)
 
     scoreLabel.setPosition((screenX / 2) - strlen(EndGameText), 300);
     screen->draw(scoreLabel);
+
+    restartLabel.setPosition(endLabel.getPosition().x - 200, endLabel.getPosition().y + 50);
+    screen->draw(restartLabel);
 }

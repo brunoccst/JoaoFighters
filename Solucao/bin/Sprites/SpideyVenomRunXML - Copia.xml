@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TextureAtlas imagePath="../../Sprites/VenomRun.png" width="157" height="536">
-    <sprite n="0" x="0" y="0" w="157" h="134"/>
-    <sprite n="1" x="0" y="134" w="157" h="134"/>
-    <sprite n="2" x="0" y="272" w="157" h="130"/>
-    <sprite n="3" x="0" y="402" w="157" h="134"/>
-</TextureAtlas>

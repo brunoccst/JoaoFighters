@@ -47,6 +47,7 @@ class EndGameState : public cgf::GameState
 
         sf::Font font;
         sf::Text endLabel;
+        sf::Text restartLabel;
         sf::Text scoreLabel;
 };
 

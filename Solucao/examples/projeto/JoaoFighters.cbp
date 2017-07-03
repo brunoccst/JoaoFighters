@@ -136,10 +136,14 @@
 		<Unit filename="JoaoFighters.user" />
 		<Unit filename="Modelos/Caixa.cpp" />
 		<Unit filename="Modelos/Caixa.h" />
+		<Unit filename="Modelos/Objeto.cpp" />
+		<Unit filename="Modelos/Objeto.h" />
 		<Unit filename="Modelos/Obstaculo.cpp" />
 		<Unit filename="Modelos/Obstaculo.h" />
 		<Unit filename="Modelos/SpiderMan.cpp" />
 		<Unit filename="Modelos/SpiderMan.h" />
+		<Unit filename="Modelos/Venom.cpp" />
+		<Unit filename="Modelos/Venom.h" />
 		<Unit filename="States/EndGameState.cpp" />
 		<Unit filename="States/EndGameState.h" />
 		<Unit filename="States/MenuState.cpp" />

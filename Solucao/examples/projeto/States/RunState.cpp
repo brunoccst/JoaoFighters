@@ -23,6 +23,12 @@ const char* SpiderMan = "Sprites/Spidey1.png";
 
 void RunState::init()
 {
+    srand(time(NULL));
+    backgroundMusic.loadFromFile("Music/backgroundMusic.wav");
+    music.setBuffer(backgroundMusic);
+    music.setAttenuation(0);
+    music.play();
+
     // Carrega background
     backgroundSprite1.load("BackGroundImages/CityNight3.png");
     backgroundSprite1.setScale(0.8, 0.50);
@@ -47,9 +53,15 @@ void RunState::init()
     player.setScale(0.5, 0.5);
     player.play();
 
+    shot.load("Sprites/ShotAnim1.png");
+    shot.setScale(0.5,0.5);
+    shot.setPosition(originalX+68,originalY-33);
+    shot.setVisible(false);
+
     pulando = false;
     segundoPulo = false;
     caindo = false;
+    batendo = false;
 
     im = cgf::InputManager::instance();
 
@@ -130,6 +142,12 @@ void RunState::handleEvents(cgf::Game* game)
         }
     }
 
+    if(im->testEvent("right")){
+        if(!batendo){
+            batendo = true;
+        }
+    }
+
 
     // TODO: implementar botao "enter" para pausar
 //    if(im->testEvent("enter"))
@@ -171,8 +189,9 @@ void RunState::aumentaVelocidade() {
 void RunState::atualizaPersonagem() {
     // Se estiver no estado "pulando"..
     if (pulando){
+        correndo = false;
         //Animaçao Pulo
-
+        shot.setVisible(false);
         if(!segundoPulo){
             player.loadXML("Sprites/SpideyJumpXML.xml");
             player.loadAnimation("Sprites/SpideyAnim.xml");
@@ -207,22 +226,36 @@ void RunState::atualizaPersonagem() {
             pulando = false;
             segundoPulo = false;
             caindo = false;
+            correndo = true;
             maxY = originalY - 160;
-            player.loadXML("Sprites/SpideyRunXML.xml");
-            player.loadAnimation("Sprites/SpideyAnim.xml");
-            player.setAnimRate(10);
             player.setPosition(originalX,originalY-40);
-            player.setAnimation("run");
-            player.play();
         }
+    }else if(batendo){
+        batendo = false;
+        correndo = true;
+        shot.setVisible(true);
+        player.loadXML("Sprites/SpideyShotXML.xml");
+        player.loadAnimation("Sprites/SpideyAnim.xml");
+        player.setAnimRate(10);
+        player.setAnimation("shot");
+        player.play();
+    }else if(!batendo && !pulando && correndo){
+        shot.setVisible(false);
+        correndo = false;
+        player.loadXML("Sprites/SpideyRunXML.xml");
+        player.loadAnimation("Sprites/SpideyAnim.xml");
+        player.setAnimRate(10);
+        player.setAnimation("run");
+        player.play();
     }
+
 }
 
 // Cria novos objetos, se necessario
 void RunState::tentaAdicionarObstaculo() {
     Obstaculo obs = geradorDeObstaculos.CriaObstaculo();
     if (obs.Carregado) {
-        obs.sprite.setPosition(950, originalY);
+        obs.GetSprite().play();
         obstaculos.push_back(obs);
         //cout << "Objeto adicionado. Total: " << obstaculos.size() << endl;
     }
@@ -238,7 +271,7 @@ bool RunState::atualizaObstaculos()
         obsIteration = &obstaculos[i];
 
         // Desloca objetos
-        obsIteration->sprite.setPosition(obsIteration->sprite.getPosition().x - (runSpeed * 40), originalY);
+        obsIteration->sprite.setPosition(obsIteration->sprite.getPosition().x - (runSpeed * 40), obsIteration->sprite.getPosition().y);
         posObstaculo = obsIteration->sprite.getPosition();
 
         // Valida colisao
@@ -251,8 +284,18 @@ bool RunState::atualizaObstaculos()
         )
 
         {
+            music.stop();
             cout << "Colidiu! FIM DE JOGO!" << endl;
             return true;
+        }
+        // Verifica impacto com Venoms
+        if(obsIteration->isVenom && shot.isVisible()){
+            if(shot.getPosition().x <= posObstaculo.x && shot.getPosition().x+125 >= posObstaculo.x)
+            {
+                obstaculos.erase(obstaculos.begin() + i);
+                i--;
+                cout << "Matou inimigo!" << endl;
+            }
         }
 
         // Destroi obstaculo se saiu da area
@@ -261,6 +304,7 @@ bool RunState::atualizaObstaculos()
             i--;
             cout << "Deletou objeto!" << endl;
         }
+
     }
 
     return false;
@@ -269,7 +313,9 @@ bool RunState::atualizaObstaculos()
 void RunState::update(cgf::Game* game)
 {
     player.update(game->getUpdateInterval());
-
+    if(music.getStatus() == sf::Sound::Stopped){
+        music.play();
+    }
     // Incrementa score
     score += 1;
     aumentaVelocidade();
@@ -306,6 +352,7 @@ void RunState::draw(cgf::Game* game)
     screen->draw(backgroundSprite1);
     screen->draw(backgroundSprite2);
     screen->draw(player);
+    screen->draw(shot);
 
     // Desenha os obstaculos
     for (int i = 0; i < obstaculos.size(); i++) {

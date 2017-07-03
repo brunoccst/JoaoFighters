@@ -16,6 +16,7 @@ class Obstaculo
         cgf::Sprite GetSprite();
         cgf::Sprite sprite;
         bool Carregado;
+        bool isVenom;
     protected:
     private:
 };

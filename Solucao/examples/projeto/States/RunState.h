@@ -50,6 +50,8 @@ class RunState : public cgf::GameState
         bool pulando;
         bool segundoPulo;
         bool caindo;
+        bool batendo;
+        bool correndo;
 
         void updateScoreLabel();
         void updateBackgroundImage();
@@ -63,6 +65,9 @@ class RunState : public cgf::GameState
 
         // Jogadores
         cgf::Sprite player;
+        cgf::Sprite shot;
+        sf::SoundBuffer backgroundMusic;
+        sf::Sound music;
 
         sf::RenderWindow* screen;
         cgf::Sprite backgroundSprite1;

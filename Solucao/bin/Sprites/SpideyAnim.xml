@@ -9,5 +9,6 @@ loop   => looping animation (default)
     <sequence name="run"  start="0" end="3" loop="true" />
     <sequence name="jump"  start="0" end="1" loop="true" />
     <sequence name="secondjump"  start="0" end="3" loop="true" />
+	<sequence name="shot"  start="0" end="1" loop="false" />
 </animation>
 

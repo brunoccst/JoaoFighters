@@ -3,6 +3,8 @@
 Obstaculo::Obstaculo()
 {
     this->Carregado = false;
+    this->isVenom = false;
+
 }
 
 Obstaculo::Obstaculo(cgf::Sprite sprite)
@@ -15,3 +17,4 @@ cgf::Sprite Obstaculo::GetSprite()
 {
     return this->sprite;
 }
+

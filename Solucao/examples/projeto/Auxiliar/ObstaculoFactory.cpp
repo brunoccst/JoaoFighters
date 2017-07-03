@@ -1,5 +1,6 @@
 #include "ObstaculoFactory.h"
 #include "Caixa.h"
+#include "Venom.h"
 #include <iostream>
 #include <ctime>
 
@@ -9,7 +10,7 @@ ObstaculoFactory::ObstaculoFactory()
 {
     // Tipos:
     // Caixa
-    quantidadeDeTipos = 1;
+    quantidadeDeTipos = 2;
     cronometro = clock();
 }
 
@@ -17,18 +18,18 @@ Obstaculo ObstaculoFactory::CriaObstaculo()
 {
     // So gera se ja passou 2 segundos desde a ultima criacao
     //cout << "clock " <<  cronometro << " novo clock " << clock() << endl;
-    if (clock() - cronometro > 1000000) {
-        cronometro = clock();
+    //if (clock() - cronometro > 500000) {
+        //cronometro = clock();
         int chanceDeCriar = (int)((rand() % 100) + 1);
-        if (chanceDeCriar > 50) {
+        if (chanceDeCriar > 99) {
             switch((int)(rand() % quantidadeDeTipos) + 1) {
                 case 1: //Caixa
-                    cout << "Gerou caixa" << endl;
-                    return Caixa();
+                    cout << "Gerou venom" << endl;
+                    return Venom();
 
                     break;
                 default:
-                    cout << "Gerou default (caixa)" << endl;
+                    cout << "Gerou caixa" << endl;
                     return Caixa();
                     break;
             }
@@ -37,13 +38,13 @@ Obstaculo ObstaculoFactory::CriaObstaculo()
             //cout << "Nao gerou objeto" << endl;
             return Obstaculo();
         }
-    }
+    //}
 
-    else
-    {
+    //else
+    //{
         //cout << "Nao gerou objeto" << endl;
-        return Obstaculo();
-    }
+    //    return Obstaculo();
+    //}
 
 }
 

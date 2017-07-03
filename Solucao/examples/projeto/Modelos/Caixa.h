@@ -7,6 +7,7 @@ class Caixa : public Obstaculo
 {
     public:
         Caixa();
+        void playSprite();
     protected:
     private:
 };
